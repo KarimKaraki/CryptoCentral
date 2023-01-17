@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CryptoCentral</title>
+	<style>
+		.head1 {
+			font-size:40px;
+            font-family: 'Times New Roman',Times, serif;
+			color:#be7909;
+			font-weight:bold;
+            background-color: greenyellow;
+		}
+		.head2 {
+			font-size:17px;
+            font-family: 'Times New Roman', Times, serif;
+            color: #be7909;
+            background-color: greenyellow;
+		}
+		body {
+			margin: 0 auto;
+			background-position:center;
+			background-size: contain;
+			background-color: greenyellow;
+		}
+	
+		.menu {
+			position: sticky;
+			top: 0;
+			background-color: #be7909;
+			padding:0px 0px 0px 0px;
+			color:white;
+			margin: 0 auto;
+			overflow: hidden;
+            
+		}
+		.menu a {
+			float: left;
+			color: white;
+            background-color: #be7909;
+			text-align: center;
+			padding: 14px 16px;
+			font-size: 20px;
+            border: #be7909;
+            
+		}
+		.menu-log {
+			right: auto;
+			float: right;
+		}
+		.body_sec {
+			margin-left:0px;
+            margin-top: 0px;
+            padding: 0px 0px 0px 0px;
+            background-color: greenyellow;
+		}
+       
+
+        .body_sec p{
+            margin: 0px 0px 0px 0px;
+        }
+
+        .body_sec h2{
+            margin: 10px 0px 0px 0px;
+        }
+
+        .affine {
+            background-color: greenyellow;
+            margin: 0px 0px 0px 0px;
+            padding: 0px 0px 0px 0px ;
+        }
+
+        .Affine_Section{
+            background-color: greenyellow;
+		}
+
+		.flexbox {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			justify-content:space-between;
+			align-items: center;
+			align-items: space-between
+		}
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: 60px;
+			height: 34px;
+		}
+		  
+		  /* Hide default HTML checkbox */
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+		
+		/* The slider */
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: red;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+		
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 26px;
+			width: 26px;
+			left: 4px;
+			bottom: 4px;
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		input:checked + .slider {
+			background-color: #2196F3;
+		}
+		
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196F3;
+		}
+		
+		input:checked + .slider:before {
+			-webkit-transform: translateX(26px);
+			-ms-transform: translateX(26px);
+			transform: translateX(26px);
+		}
+		
+		/* Rounded sliders */
+		.slider.round {
+			border-radius: 34px;
+		}
+		
+		.slider.round:before {
+			border-radius: 50%;
+		}
+	</style>
+</head>
+
+<body>
+	
+	<!-- Header Section -->
+	<header>
+		<div class="head1">CryptoCentral</div>
+		<div class="head2">Collection of Encryption adn Decryption Algorithms</div>
+	</header>
+	
+	<!-- Menu Navigation Bar -->
+	<nav class="menu">
+		<a href="#home">Affine</a>
+		<a href="#news">MonoAlphabetic</a>
+		<a href="#notification">Vigenere</a>
+        <a href="#playfaircipher">PLayFair</a>
+        <a href="#Hill">Hill</a>
+        <a href="#extended euclid">Extended Euclid Algorithm</a>
+	</nav>
+	
+	<!-- Body section -->
+	<main class = "body_sec">
+		<section class="Affine_Section">
+            <div name="affine">
+                <h2>Affine Cipher</h2>
+				<form action="{{url_for('submit')}}" method="post">
+					<input type="checkbox" name="encrypt_Decrypt" value=1>
+					<p>a:</p>
+					<textarea name="a" id="a" cols="10" rows="1"></textarea>
+					<p>b:</p>
+					<textarea name="b" id="b" cols="10" rows="1"></textarea>
+					<p>Input:</p>
+					<textarea name="var" id="var affine" cols="30" rows="7"></textarea>
+					<input type="submit">
+
+					<p>{{ output }}</p>
+				</form>
+            </div>
+		</section>
+        <section id = "extended euclid">
+            <h2>Extended Euclidien Algorithm</h2>
+            <div>
+				<form action="/inverse" method="post">
+					<p>Find inverse of A modulo B</p>
+					<p>A:</p>
+					<textarea name="A_inverse" id="A" cols="10" rows="1"></textarea>
+					<p>B:</p>
+					<textarea name="B_inverse" id="B" cols="10" rows="1"></textarea>
+					<input type="submit" value="calculate">
+				</form>
+				<p>{{ output1 }}</p>
+			</div>
+        </section>
+		<section id = "Vigenere">
+			<h2>Vigenere Cipher</h2>
+			<div>
+				<form action="/vigenere" method="post">
+					<input type="checkbox" name="encrypt_Decrypt2" value=1>
+					<p>Find inverse of A modulo B</p>
+					<p>KeyWord:</p>
+					<textarea name="KeyWord" id="Key" cols="20" rows="2"></textarea>
+					<p>Plain/CipherText:</p>
+					<textarea name="text" id="text" cols="20" rows="2"></textarea>
+					<input type="submit" value="Submit">
+				</form>
+				<p>{{ output2 }}</p>
+			</div>
+		</section>
+
+		<section id = "MonoAlphabetic_section" >
+			<h2>Monoalphabetic Cipher</h2>
+			<div>
+				<form action="/monoalphabetic_enc" method="post">
+					<p style="font-weight:bold; font-size: 20px; " >Encryption:</p>
+					<p>Plain text:</p>
+					<textarea name="KeyWord" id="Key" cols="20" rows="2"></textarea>
+					<p>Cipher Text:</p>
+					<textarea name="text" id="text" cols="20" rows="2" disabled>{{ mono_cipher }}</textarea>
+                    <input type="submit" value="Submit" style="display:block;">
+				</form>
+
+				<form action="/monoalphabetic_dec" method="post">
+					<p style="font-weight:bold; font-size: 20px;" >Decryption:</p>
+					<p>Cipher text</p>
+					<textarea name="KeyWord" id="Key" cols="20" rows="2"></textarea>
+					<p>Plain Text:</p>
+					<textarea name="text" id="text" cols="20" rows="2" disabled>{{ mono_plain }}</textarea>
+                    <input type="submit" value="Submit" style="display:block;">
+				</form>
+			</div>
+		</section>
+
+		<section id = "PlayFair_section" >
+			<h2>PlayFair Cipher</h2>
+			<div>
+				<form action="/playfair_enc" method="post">
+					
+					<p style="font-weight:bold; font-size: 20px; " >Encryption:</p>
+					<p>Key:</p>
+					<textarea name="KeyWord" id="Key" cols="10" rows="1"></textarea>
+					<p>Plain text:</p>
+					<textarea name="plain" id="plain" cols="20" rows="2"></textarea>
+					<p>Cipher Text:</p>
+					<p>{{ output3 }}</p>
+					<input type="submit" value="Submit" style="display:block;">
+				</form>
+
+				<form action="/playfair_dec" method="post">
+					<p style="font-weight:bold; font-size: 20px;" >Decryption:</p>
+					<p>Key:</p>
+					<textarea name="KeyWord" id="Key" cols="10" rows="1"></textarea>
+					<p>Cipher text</p>
+					<textarea name="cipher" id="cipher" cols="20" rows="2"></textarea>
+					<p>Plain Text: {{output4}}</p>
+					<input type="submit" value="Submit" style="display:block;">
+				</form>
+			</div>
+
+			<section id = "Hill">
+				<h2>Hill Cipher</h2>
+				<div>
+					<form action="/hill" method="post">
+						<p>KeyWord:</p>
+						<textarea name="KeyWord" id="hill_key" cols="20" rows="2"></textarea>
+						<p>Plain/CipherText:</p>
+						<textarea name="text" id="hill_text" cols="20" rows="2"></textarea>
+						<input type="submit" value="Submit">
+					</form>
+					<p>{{ output5 }}</p>
+				</div>
+			</section>
+
+	</main>
+	
+	<!-- Footer Section -->
+</body>
+</html>
